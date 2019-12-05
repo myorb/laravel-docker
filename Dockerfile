@@ -39,20 +39,4 @@ WORKDIR /var/www
 
 COPY . .
 
-RUN npm install
-RUN npm run prod
-
-RUN chmod a+rw -R storage
-
-ENV AWS_ENV_PATH=/api/delivery-service/
-ENV AWS_REGION=eu-central-1
-
-COPY deploy/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY deploy/nginx.conf /etc/nginx/nginx.conf
-
-RUN composer install --no-scripts
-
-EXPOSE 8080
-
-ENTRYPOINT [ "bash", "./run.sh" ]
-# HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:8080/fpm-ping
+EXPOSE 80
