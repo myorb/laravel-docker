@@ -3,6 +3,8 @@ FROM php:7.3-fpm
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     curl \
+    zip \
+    unzip \
     libmemcached-dev \
     libz-dev \
     libpq-dev \
@@ -14,7 +16,8 @@ RUN apt-get update \
     libxml2-dev \
     nginx \
     supervisor \
-    libzip-dev -y
+    libzip-dev \
+    cron -y
 
 RUN apt-get install nodejs -y
 RUN apt-get install npm -y
