@@ -15,4 +15,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag laravel-docker:$(date +%s)
+      run: docker build . --file Dockerfile --tag myorb/laravel-docker:$(date +%s)
+
+    - name: docker login
+      env:
+        DOCKER_USER: ${{secrets.DOCKER_USER}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
+      
+    - name: Docker Push
+      run: docker push myorb/laravel-docker
